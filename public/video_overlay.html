@@ -3,6 +3,55 @@
 <html>
 <head>
     <title>Viewer Page</title>
+    <style>
+        .hideElement{
+            visibility: hidden;
+        }
+
+        /* EMOTE PROGRESS BAR*/
+        #EmoteProgressBar {
+            position: absolute;
+            right: 45px;
+            bottom: 80px;
+        }
+        .bar {
+            width: 35px;
+            height: 5px;
+            margin: 6px 0;
+        }
+        #bar10 {
+            background-color: #FF0000;
+        }
+        #bar9 {
+            background-color: #FF3400;
+        }
+        #bar8 {
+            background-color: #FF6900;
+        }
+        #bar7 {
+            background-color: #FF9E00;
+        }
+        #bar6 {
+            background-color: #FFD300;
+        }
+        #bar5 {
+            background-color: #F7FF00;
+        }
+        #bar4 {
+            background-color: #D4FF00;
+        }
+        #bar3 {
+            background-color: #9FFF00;
+        }
+        #bar2 {
+            background-color: #58FF00;
+        }
+        #bar1 {
+            background-color: #24FF00;
+        }
+
+    
+    </style>
 </head>
 <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <div id="app" class="full-height"></div>
@@ -18,13 +67,40 @@
         <input type="button" id="cycle" disabled="disabled" value="ignore this" />
     </div>
     <div>
-        <input type="button" id="AudioPlay" value="Activate the thunder" /
+        <input type="button" id="AudioPlay" value="Activate the thunder" />
     </div>
     <div id="AudioControlDiv">
         <i id="AudioControl" class="fas fa-volume-up"></i>
     </div>
+    <div>
+            <input type="button" id="EmptyBar" value="0%" />
+            <input type="button" id="HalfBar" value="50%" />
+            <input type="button" id="FullBar" value="100%" />
+        
+    </div>
+    <div>
+            <input type="button" id="testtext1" value="PogChamp" />
+            <input type="button" id="testtext2" value="Kappa" />
+            <input type="button" id="testtext3" value="OK" />
+    </div>
     <div id="ChannelID"><p>asdfasd</p>
 
+    </div>
+    <div id="EmoteProgressBar">
+        <div>
+            <p>Current Emote:</p>
+            <p id="CurrentEmoteText"></p>
+        </div>
+        <div class="bar hideElement" id="bar10"></div>
+        <div class="bar hideElement" id="bar9"></div>
+        <div class="bar hideElement" id="bar8"></div>
+        <div class="bar hideElement" id="bar7"></div>
+        <div class="bar hideElement" id="bar6"></div>
+        <div class="bar hideElement" id="bar5"></div>
+        <div class="bar hideElement" id="bar4"></div>
+        <div class="bar hideElement" id="bar3"></div>
+        <div class="bar hideElement" id="bar2"></div>
+        <div class="bar hideElement" id="bar1"></div>
     </div>
     <div id="list">
     </div>

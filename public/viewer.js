@@ -4,6 +4,7 @@ var ebs = "";
 var chID = ""; //channel ID
 var vCount = "";
 var clientID= "915s1vuysn8c3qav9owo04349xf19d";
+var pogchampInt = 0;
 
 // because who wants to type this every time?
 var twitch = window.Twitch.ext;
@@ -72,7 +73,21 @@ function playAudio(){
     audio.currentTime = 0;
     audio.play();
 }
+// NUMBAR VAL: 0 - 10 starting at 0% - 100%
+function setEmoteProgressBar(numBar){
+    var i;
+    var bars = ["bar1","bar2","bar3","bar4","bar5","bar6","bar7","bar8","bar9","bar10",]
+    for (i = 0; i < numBar; i++){
+        $('#'+bars[i]).removeClass("hideElement");
+    }
+    for (i = numBar; i < 10; i++){
+        $('#'+bars[i]).addClass("hideElement");
+    }
+}
 
+function setCurrentEmoteText(emoteName){
+    $('#CurrentEmoteText').html(emoteName);
+}
 
 $(function() {
 
@@ -88,6 +103,41 @@ $(function() {
         $('#AudioControl').toggleClass("fa-volume-off");
 
 
+    });
+
+    $('#EmptyBar').click(function() {
+        setEmoteProgressBar(0);
+    });
+    $('#HalfBar').click(function() {
+        setEmoteProgressBar(5);
+    });
+    $('#FullBar').click(function() {
+        setEmoteProgressBar(10);
+    });
+    
+    $('#reset').click(function() {
+        $.ajax({
+            type: "POST",
+            url: "INSERT PYTHON CODE",
+            data: { param: text}
+            }).done(function( o ) {
+            
+        });
+    })
+
+    $('#testtext1').click(function() {
+        setCurrentEmoteText("PogChamp")
+        twitch.rig.log(pogchampInt)
+        pogchampInt++
+        if (pogchampInt >= 2) {
+            playAudio()
+        }
+    });
+    $('#testtext2').click(function() {
+        setCurrentEmoteText("Kappa");
+    });
+    $('#testtext3').click(function() {
+        setCurrentEmoteText("OK");
     });
 
     $('#AudioPlay').click(function() {
