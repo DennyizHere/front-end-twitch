@@ -16,4 +16,4 @@ def index(request):
         'threshholdFlag':threshholdFlag,
     }
 
-    return render(request, 'video_overlay.html', context=context)
+    return render(request, './public/video_overlay.html', context=context)

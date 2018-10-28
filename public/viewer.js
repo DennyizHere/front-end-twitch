@@ -17,6 +17,10 @@ var requests = {
     get: createRequest('GET', 'query')
 };
 
+if (checker == true) {
+    playAudio();
+}
+
 function createRequest(type, method) {
 
     return {
