@@ -1,6 +1,9 @@
 var token = "";
 var tuid = "";
 var ebs = "";
+var chID = ""; //channel ID
+var vCount = "";
+var clientID= "915s1vuysn8c3qav9owo04349xf19d";
 
 // because who wants to type this every time?
 var twitch = window.Twitch.ext;
@@ -38,6 +41,8 @@ twitch.onAuthorized(function(auth) {
     // save our credentials
     token = auth.token;
     tuid = auth.userId;
+    chID = auth.channelId;
+
 
     // enable the button
     $('#cycle').removeAttr('disabled');
@@ -93,7 +98,21 @@ $(function() {
             twitch.rig.log("Turned off. Clip not playing");
 
         }
+        twitch.rig.log(chID);
+
+        $.ajax({ //GET FOR STREAM INFORMATION (VIEWER COUNT)
+            type: 'GET',
+            url: 'https://api.twitch.tv/kraken/streams/' + chID,
+            headers: {
+              'Client-ID': clientID
+            },
+            success: function(data) {
+               // var vCount = data.stream.viewers;
+                twitch.rig.log(data);
+            }
+           });
     });
+
 
     // listen for incoming broadcast message from our EBS
     twitch.listen('broadcast', function (target, contentType, color) {
