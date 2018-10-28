@@ -7,9 +7,10 @@ Licensed under the Apache License, Version 2.0 (the "License"). You may not use 
 
 or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 '''
-import cherrypy
 import irc.bot
+
 import calculate
+
 
 class TwitchBot(irc.bot.SingleServerIRCBot):
     def __init__(self, username, client_id, token, channel):
@@ -50,12 +51,15 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         for emote in self.emotesArray:
             if self.emotes[emote]['count'] >= calculate.threshhold:
                 index = open("./public/video_overlays.html").read().format(threshholdFlag='true')
+                # play sound
+                print('playing sound')
                 self.emotes[emote]['count'] = 0
+
 
 def main():
     username = 'xjavathehutt'
-    client_id = 'RsjMUhqNxUOfd1mFGxqKlS4G6qUpJd'
-    token = 'nv302jy8evfym8lbbtnzvqh3dtucxs'
+    client_id = '0ecb43trffudcqwxflq1k13ivl9rlv'
+    token = 'utxgm9i6s8z3goc2xwmsglc1rbk09q'
     channel = 'xjavathehutt'
 
     bot = TwitchBot(username, client_id, token, channel)
