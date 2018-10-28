@@ -17,7 +17,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         self.client_id = client_id
         self.token = token
         self.channel = '#' + channel
-        self.emotesArray = ['PogChamp']
+        self.emotesArray = ['PogChamp', 'Kappa']
         self.emotes = {}
         for e in self.emotesArray:
             self.emotes[e] = {
@@ -26,7 +26,9 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             }
             self.threshhold = calculate.calculate_threshhold()
 
-        # Create IRC bot connection
+        self.emotes['PogChamp']['sound'] = 'wombo.mp3'
+        self.emotes['Kappa']['sound'] = 'yee.mp3'
+
         server = 'irc.chat.twitch.tv'
         port = 6667
         print('Connecting to ' + server + ' on port ' + str(port) + '...')
@@ -51,7 +53,8 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
                 break
         for emote in self.emotesArray:
             if self.emotes[emote]['count'] >= self.threshhold:
-                player = vlc.MediaPlayer("audio.mp3")
+                soundfile = self.emotes[emote]['sound']
+                player = vlc.MediaPlayer(soundfile)
                 player.play()
                 print('playing sound')
                 self.emotes[emote]['count'] = 0
