@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+<html>
+<head>
+    <title>Viewer Page</title>
+</head>
+<body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <div id="app" class="full-height"></div>
+    <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+    <!-- TODO:  remove the following script tag before submitting to Twitch for testing or production. -->
+    <script src="https://localhost.rig.twitch.tv:3000/twitch-ext.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="viewer.js" type="text/javascript"></script>
+    <p style="font-family:courier;">Chat has gone: POGCHAMP</p>
+    <div>
+        <input type="button" id="cycle" disabled="disabled" value="Activate the thunder" />
+    </div>
+    <div id="AudioControlDiv">
+        <i id="AudioControl" class="fas fa-volume-up"></i>
+    </div>
+    <div id="list">
+    </div>
+</body>
+</html>
