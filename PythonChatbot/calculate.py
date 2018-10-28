@@ -6,3 +6,4 @@ data = response.json()
 viewers = data["stream"]["viewers"]
 threshhold = int(viewers / 10000)
 print(threshhold)
+
