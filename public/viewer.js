@@ -72,7 +72,21 @@ function playAudio(){
     audio.currentTime = 0;
     audio.play();
 }
+// NUMBAR VAL: 0 - 10 starting at 0% - 100%
+function setEmoteProgressBar(numBar){
+    var i;
+    var bars = ["bar1","bar2","bar3","bar4","bar5","bar6","bar7","bar8","bar9","bar10",]
+    for (i = 0; i < numBar; i++){
+        $('#'+bars[i]).removeClass("hideElement");
+    }
+    for (i = numBar; i < 10; i++){
+        $('#'+bars[i]).addClass("hideElement");
+    }
+}
 
+function setCurrentEmoteText(emoteName){
+    $('#CurrentEmoteText').html(emoteName);
+}
 
 $(function() {
 
@@ -88,6 +102,26 @@ $(function() {
         $('#AudioControl').toggleClass("fa-volume-off");
 
 
+    });
+
+    $('#EmptyBar').click(function() {
+        setEmoteProgressBar(0);
+    });
+    $('#HalfBar').click(function() {
+        setEmoteProgressBar(5);
+    });
+    $('#FullBar').click(function() {
+        setEmoteProgressBar(10);
+    });
+
+    $('#testtext1').click(function() {
+        setCurrentEmoteText("PogChamp");
+    });
+    $('#testtext2').click(function() {
+        setCurrentEmoteText("Kappa");
+    });
+    $('#testtext3').click(function() {
+        setCurrentEmoteText("OK");
     });
 
     $('#AudioPlay').click(function() {
