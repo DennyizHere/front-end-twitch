@@ -9,7 +9,6 @@ or in the "license" file accompanying this file. This file is distributed on an 
 '''
 
 import irc.bot
-import requests
 
 
 class TwitchBot(irc.bot.SingleServerIRCBot):

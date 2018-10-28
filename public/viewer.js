@@ -4,6 +4,7 @@ var ebs = "";
 var chID = ""; //channel ID
 var vCount = "";
 var clientID= "915s1vuysn8c3qav9owo04349xf19d";
+var pogchampInt = 0;
 
 // because who wants to type this every time?
 var twitch = window.Twitch.ext;
@@ -115,7 +116,12 @@ $(function() {
     });
 
     $('#testtext1').click(function() {
-        setCurrentEmoteText("PogChamp");
+        setCurrentEmoteText("PogChamp")
+        twitch.rig.log(pogchampInt)
+        pogchampInt++
+        if (pogchampInt >= 2) {
+            playAudio()
+        }
     });
     $('#testtext2').click(function() {
         setCurrentEmoteText("Kappa");

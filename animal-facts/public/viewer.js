@@ -1,6 +1,10 @@
 var token = "";
 var tuid = "";
 var ebs = "";
+var chID = ""; //channel ID
+var vCount = "";
+var clientID= "915s1vuysn8c3qav9owo04349xf19d";
+var pogchampInt = 0;
 
 // because who wants to type this every time?
 var twitch = window.Twitch.ext;
@@ -38,6 +42,8 @@ twitch.onAuthorized(function(auth) {
     // save our credentials
     token = auth.token;
     tuid = auth.userId;
+    chID = auth.channelId;
+
 
     // enable the button
     $('#cycle').removeAttr('disabled');
@@ -67,7 +73,21 @@ function playAudio(){
     audio.currentTime = 0;
     audio.play();
 }
+// NUMBAR VAL: 0 - 10 starting at 0% - 100%
+function setEmoteProgressBar(numBar){
+    var i;
+    var bars = ["bar1","bar2","bar3","bar4","bar5","bar6","bar7","bar8","bar9","bar10",]
+    for (i = 0; i < numBar; i++){
+        $('#'+bars[i]).removeClass("hideElement");
+    }
+    for (i = numBar; i < 10; i++){
+        $('#'+bars[i]).addClass("hideElement");
+    }
+}
 
+function setCurrentEmoteText(emoteName){
+    $('#CurrentEmoteText').html(emoteName);
+}
 
 $(function() {
 
@@ -85,6 +105,31 @@ $(function() {
 
     });
 
+    $('#EmptyBar').click(function() {
+        setEmoteProgressBar(0);
+    });
+    $('#HalfBar').click(function() {
+        setEmoteProgressBar(5);
+    });
+    $('#FullBar').click(function() {
+        setEmoteProgressBar(10);
+    });
+
+    $('#testtext1').click(function() {
+        setCurrentEmoteText("PogChamp")
+        twitch.rig.log(pogchampInt)
+        pogchampInt++
+        if (pogchampInt >= 2) {
+            playAudio()
+        }
+    });
+    $('#testtext2').click(function() {
+        setCurrentEmoteText("Kappa");
+    });
+    $('#testtext3').click(function() {
+        setCurrentEmoteText("OK");
+    });
+
     $('#AudioPlay').click(function() {
         if ($('#AudioControl').hasClass("fa-volume-up")){
             playAudio();
@@ -93,7 +138,21 @@ $(function() {
             twitch.rig.log("Turned off. Clip not playing");
 
         }
+        twitch.rig.log(chID);
+
+        $.ajax({ //GET FOR STREAM INFORMATION (VIEWER COUNT)
+            type: 'GET',
+            url: 'https://api.twitch.tv/kraken/streams/' + chID,
+            headers: {
+              'Client-ID': clientID
+            },
+            success: function(data) {
+               // var vCount = data.stream.viewers;
+                twitch.rig.log(data);
+            }
+           });
     });
+
 
     // listen for incoming broadcast message from our EBS
     twitch.listen('broadcast', function (target, contentType, color) {
