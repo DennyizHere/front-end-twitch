@@ -114,6 +114,16 @@ $(function() {
     $('#FullBar').click(function() {
         setEmoteProgressBar(10);
     });
+    
+    $('#reset').click(function() {
+        $.ajax({
+            type: "POST",
+            url: "INSERT PYTHON CODE",
+            data: { param: text}
+            }).done(function( o ) {
+            
+        });
+    })
 
     $('#testtext1').click(function() {
         setCurrentEmoteText("PogChamp")
