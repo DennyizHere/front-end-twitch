@@ -84,6 +84,9 @@ function setEmoteProgressBar(numBar){
     }
 }
 
+function setCurrentEmoteText(emoteName){
+    $('#CurrentEmoteText').html(emoteName);
+}
 
 $(function() {
 
@@ -109,6 +112,16 @@ $(function() {
     });
     $('#FullBar').click(function() {
         setEmoteProgressBar(10);
+    });
+
+    $('#testtext1').click(function() {
+        setCurrentEmoteText("PogChamp");
+    });
+    $('#testtext2').click(function() {
+        setCurrentEmoteText("Kappa");
+    });
+    $('#testtext3').click(function() {
+        setCurrentEmoteText("OK");
     });
 
     $('#AudioPlay').click(function() {
