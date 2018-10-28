@@ -9,13 +9,20 @@ or in the "license" file accompanying this file. This file is distributed on an 
 '''
 
 import irc.bot
-
+import calculate
 
 class TwitchBot(irc.bot.SingleServerIRCBot):
     def __init__(self, username, client_id, token, channel):
         self.client_id = client_id
         self.token = token
         self.channel = '#' + channel
+        self.emotesArray = ['PogChamp']
+        self.emotes = {}
+        for e in self.emotesArray:
+            self.emotes[e] = {
+                'count': 0,
+                'sound': ''
+            }
 
         # Create IRC bot connection
         server = 'irc.chat.twitch.tv'
@@ -33,7 +40,17 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         c.join(self.channel)
 
     def on_pubmsg(self, c, e):
-            print('Received command: ' + e.arguments[0])
+        msg = e.arguments[0]
+        msg_array = msg.split()
+        for word in msg_array:
+            if word in self.emotesArray:
+                self.emotes[word]['count'] += 1
+                print(self.emotes)
+                break
+        for emote in self.emotesArray:
+            if self.emotesArray[emote]['count'] >= calculate.threshhold:
+                # play sound
+                self.emotesArray[emote]['count'] = 0
 
 def main():
     username = 'xjavathehutt'
