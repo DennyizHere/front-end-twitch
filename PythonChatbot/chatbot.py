@@ -24,6 +24,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
                 'count': 0,
                 'sound': ''
             }
+            self.threshhold = calculate.calculate_threshhold()
 
         # Create IRC bot connection
         server = 'irc.chat.twitch.tv'
@@ -49,10 +50,12 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
                 print(self.emotes)
                 break
         for emote in self.emotesArray:
-            if self.emotes[emote]['count'] >= calculate.threshhold:
+            if self.emotes[emote]['count'] >= self.threshhold:
                 player = vlc.MediaPlayer("audio.mp3")
+                player.play()
                 print('playing sound')
                 self.emotes[emote]['count'] = 0
+                self.threshhold = calculate.calculate_threshhold()
 
 
 def main():
