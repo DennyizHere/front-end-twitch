@@ -61,6 +61,13 @@ function logSuccess(hex, status) {
   twitch.rig.log('EBS request returned '+hex+' ('+status+')');
 }
 
+function playAudio(){
+    twitch.rig.log("Playing audio clip");
+    if (!audio.paused) audio.paused;
+    audio.currentTime = 0;
+    audio.play();
+}
+
 
 $(function() {
 
@@ -70,21 +77,27 @@ $(function() {
         twitch.rig.log('Requesting a color cycle');
         $.ajax(requests.set);
     });
+
         $('#AudioControlDiv').click(function() {
         $('#AudioControl').toggleClass("fa-volume-up");
         $('#AudioControl').toggleClass("fa-volume-off");
 
+
+    });
+
+    $('#AudioPlay').click(function() {
+        if ($('#AudioControl').hasClass("fa-volume-up")){
+            playAudio();
+        }
+        else{
+            twitch.rig.log("Turned off. Clip not playing");
+
+        }
     });
 
     // listen for incoming broadcast message from our EBS
     twitch.listen('broadcast', function (target, contentType, color) {
         twitch.rig.log('Received broadcast color');
         updateBlock(color);
-        audio.currentTime = 0;
-        audio.play();
-        twitch.rig.log("Playing audio clip");
-        if (!audio.paused) audio.paused;
-        audio.currentTime = 0;
-        audio.play();
     });
 });
